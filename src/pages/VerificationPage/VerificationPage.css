@@ -1,17 +1,5 @@
-.next-btn-login{
-    background-color: #2a2929;
-    color: white;
-    height: 2.1rem;
-    width: 2.1rem;
-    border-radius: 50%;
-    margin: 1.8rem 4rem 0 auto;
-    cursor: pointer;
-    display: block;
-}
-
 .otp-container{
     margin: 1rem 0 0 6rem;
-    position: relative;
 }
 
 

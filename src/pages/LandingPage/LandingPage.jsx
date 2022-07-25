@@ -1,19 +1,23 @@
 import "./LandingPage.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDataContext } from "../../context/all-data";
 
 const LandingPage = () => {
+  const { storedDataDispatch } = useDataContext();
+
   const [number, setNumber] = useState({ phoneNumber: "", numberCode: "91" });
 
   const navigate = useNavigate();
 
-  const numberSumiter = (e) => {
+  const numberSumitter = (e) => {
     e.preventDefault();
+    storedDataDispatch({ type: "MOBILE_NUMBER", payload: number.phoneNumber });
     navigate("/OTP-verification");
   };
   return (
     <>
-      <form onSubmit={numberSumiter}>
+      <form onSubmit={numberSumitter}>
         <button type="submit" className="next-btn-login">
           <i class="fa-solid fa-chevron-right"></i>
         </button>

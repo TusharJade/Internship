@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 const VerificationPage = () => {
   const navigate = useNavigate();
 
-  const otpSubmiter = (e) => {
+  const otpSubmitter = (e) => {
     e.preventDefault();
     navigate("/step-one");
   };
   return (
     <>
-      <form onSubmit={otpSubmiter}>
+      <form onSubmit={otpSubmitter}>
         <button type="submit" className="next-btn-login">
           <i class="fa-solid fa-chevron-right"></i>
         </button>

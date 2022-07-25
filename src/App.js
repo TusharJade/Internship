@@ -7,7 +7,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/verification" element={<VerificationPage />} />
+        <Route path="/OTP-verification" element={<VerificationPage />} />
       </Routes>
       <div className="wave">
         <img src="./assets/wave.svg" alt="error" />

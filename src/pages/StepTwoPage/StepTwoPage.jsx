@@ -68,32 +68,32 @@ const StepTwoPage = () => {
           <div className="city-btns-container">
             <div
               className="city-btns"
-              onClick={(e) =>
-                setBasicInfo((item) => ({ ...item, city: e.target.innerText }))
+              onClick={() =>
+                setBasicInfo((item) => ({ ...item, city: "Mumbai" }))
               }
             >
               Mumbai
             </div>
             <div
               className="city-btns"
-              onClick={(e) =>
-                setBasicInfo((item) => ({ ...item, city: e.target.innerText }))
+              onClick={() =>
+                setBasicInfo((item) => ({ ...item, city: "Delhi" }))
               }
             >
               Delhi
             </div>
             <div
               className="city-btns"
-              onClick={(e) =>
-                setBasicInfo((item) => ({ ...item, city: e.target.innerText }))
+              onClick={() =>
+                setBasicInfo((item) => ({ ...item, city: "Pune" }))
               }
             >
               Pune
             </div>
             <div
               className="city-btns"
-              onClick={(e) =>
-                setBasicInfo((item) => ({ ...item, city: e.target.innerText }))
+              onClick={() =>
+                setBasicInfo((item) => ({ ...item, city: "Bengaluru" }))
               }
             >
               Bengaluru

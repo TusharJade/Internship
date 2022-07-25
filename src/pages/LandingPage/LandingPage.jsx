@@ -36,6 +36,7 @@ const LandingPage = () => {
               setNumber((item) => ({ ...item, phoneNumber: e.target.value }))
             }
             value={number.phoneNumber}
+            placeholder="9970703322"
             pattern="[0-9]{10}"
             type="text"
             maxLength="10"

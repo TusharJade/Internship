@@ -1,0 +1,44 @@
+.next-btn-login{
+    background-color: #2a2929;
+    color: white;
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 50%;
+    margin: 1.8rem 4rem 0 auto;
+    cursor: pointer;
+    display: block;
+}
+
+.otp-container{
+    margin: 1rem 0 0 6rem;
+    position: relative;
+}
+
+
+.text-asking-otp{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.single-input-boxes{
+    margin: 10px 5.5px 0 0;
+    padding: 2.5px 0;
+    width: 2rem;
+    border-radius: 8px ;
+    border: 2.5px solid #e4e2e2;
+    background-color: #fbf9f9;
+    box-shadow: 0px 0px 32px 0px rgb(233, 233, 233);
+    text-align: center;
+}
+
+.single-input-boxes:focus{
+    outline: none;
+}
+
+.resend-code{
+    color: #0d86d6;
+    text-decoration: underline;
+    margin:8px 0 0 1px;
+    font-size: 13.7px;
+    cursor: pointer;
+}

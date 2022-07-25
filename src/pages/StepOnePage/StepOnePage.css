@@ -1,5 +1,6 @@
 .steps-container{
     margin: 1rem 0 0 7rem;
+    position: relative;
 }
 
 .help-use-text{

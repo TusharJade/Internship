@@ -15,6 +15,12 @@ const storedDataFunction = (storedDataState, action) => {
         gender: action.payload.gender,
         name: action.payload.name,
       };
+    case "STEP_TWO_SUBMISSION":
+      return {
+        ...storedDataState,
+        email: action.payload.email,
+        city: action.payload.city,
+      };
 
     default:
       return storedDataState;
@@ -27,7 +33,7 @@ const DataContextProvider = ({ children }) => {
     name: "",
     gender: "",
     email: "",
-    hometown: "",
+    city: "",
     jobRole: "",
     experience: "",
   });

@@ -1,0 +1,24 @@
+.top-citys-text{
+    margin: 5px 6px;
+    font-size: 14.3px;
+    font-weight: 500;
+}
+
+.city-btns-container{
+    display: flex;
+    width: 19rem;
+    justify-content: space-between;
+    margin-left: 2px;
+}
+
+.city-btns{
+    all: unset;
+    font-size: 14px;
+    padding: 3px 8px;
+    background-color: #fbf9f9;
+    color:#0d86d6 ;
+    border-radius: 8px;
+    border: 2.5px solid #e4e2e2;
+    box-shadow: 0px 0px 10px 0px rgb(221, 221, 221);
+    cursor: pointer;
+}

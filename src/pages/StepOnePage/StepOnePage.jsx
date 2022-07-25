@@ -13,7 +13,9 @@ const StepOnePage = () => {
   const stepOneSubmitter = (e) => {
     e.preventDefault();
     storedDataDispatch({ type: "STEP_ONE_SUBMISSION", payload: basicInfo });
-    navigate("/");
+    basicInfo.gender.length === 0
+      ? alert("Please choose your gender first")
+      : navigate("/step-two");
   };
   return (
     <>

@@ -39,8 +39,8 @@ const DataContextProvider = ({ children }) => {
     name: "",
     gender: "",
     email: "",
-    city: "",
-    jobRole: "",
+    city: [],
+    jobRole: [],
     experience: "",
   });
   return (

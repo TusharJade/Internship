@@ -22,11 +22,6 @@
     cursor: pointer;
 }
 
-.city-btns:hover{
-    background-color:#0d86d6;
-    color: white;
-}
-
 .city-container{
     position: relative;
     z-index: 2;
@@ -97,11 +92,10 @@
     cursor: pointer;
 }
 
-/* onChange={(e) =>
-    setBasicInfo((item) => ({
-      ...item,
-      city: item.city.includes(e.target.value)
-        ? [...item.city]
-        : [...item.city, e.target.value],
-    }))
-  } */
+@media (max-width:460px) {
+    .cities-dropdown-box{
+        top: 2rem;
+        left: 15.1rem;
+        width: 7rem;
+    }
+}

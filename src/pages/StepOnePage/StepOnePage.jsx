@@ -71,9 +71,7 @@ const StepOnePage = () => {
               <img src="./assets/girl.svg" alt="error" />
               {basicInfo.gender === "female" ? (
                 <i class="fa-solid fa-circle-check checked-gender"></i>
-              ) : (
-                ""
-              )}
+              ) : null}
             </div>
           </div>
         </div>

@@ -83,8 +83,24 @@
 }
 
 @media (max-width: 426px){
+
+    .login-container{
+        margin: 4rem 2rem 0 2rem;
+   }
+
     .mobile-number-input{
         margin: 10px 0 0 0;
-        padding: 2.5px 0 2.5px 2.4rem;
+        padding: 4px 0 4px 2.4rem;
+        width: 16rem;
     }
+
+    .input-coutry-code{
+        padding: 4px 0;
+    }
+
+    .num-code{
+        top: 2.72rem;
+        left: 3.7rem;
+    }
+    
 }

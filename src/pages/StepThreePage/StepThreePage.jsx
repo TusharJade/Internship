@@ -2,14 +2,31 @@ import "./StepThreePage.css";
 import { useState } from "react";
 import { useDataContext } from "../../context/all-data";
 
-const StepThreePage = () => {
-  const { storedDataState, storedDataDispatch } = useDataContext();
+const jobRolesArray = [
+  "Frontend Developer",
+  "UI Develope",
+  "Backend Developer",
+  "Data Scientist",
+  "Content Manager",
+  "Systems Engineer",
+];
 
-  const [basicInfo, setBasicInfo] = useState({ jobRole: "", experience: "" });
+const StepThreePage = () => {
+  const { storedDataDispatch } = useDataContext();
+
+  const [basicInfo, setBasicInfo] = useState({
+    jobRole: [],
+    experience: "",
+    jobRoleInput: "",
+    jobRoleStatus: false,
+  });
 
   const stepThreeSubmitter = (e) => {
     e.preventDefault();
     storedDataDispatch({ type: "STEP_THREE_SUBMISSION", payload: basicInfo });
+    basicInfo.experience.length > 0 && basicInfo.jobRole.length > 0
+      ? alert("request send")
+      : alert("Please fill both job role and work experience to move on ");
   };
   return (
     <>
@@ -29,29 +46,83 @@ const StepThreePage = () => {
         </div>
         <div className="steps-container">
           <div className="heading-text">Role you are looking for?</div>
-          <input
-            className="input-name"
-            onChange={(e) =>
-              setBasicInfo((item) => ({ ...item, jobRole: e.target.value }))
-            }
-            value={basicInfo.jobRole}
-            type="text"
-            placeholder="Eg. Web Developer"
-            required
-          />
-          <select
-            className="job-role-selector"
-            onChange={(e) =>
-              setBasicInfo((item) => ({ ...item, jobRole: e.target.value }))
-            }
-          >
-            <option value="Frontend Developer">Frontend Developer</option>
-            <option value="UI Developer">UI Developer</option>
-            <option value="Backend Developer">Backend Developer</option>
-            <option value="Data Scientist">Data Scientist</option>
-            <option value="Content Manager">Content Manager</option>
-            <option value="Systems Engineer">Systems Engineer </option>
-          </select>
+          <div className="role-box-position">
+            <input
+              className="input-name"
+              onChange={(e) =>
+                setBasicInfo((item) => ({
+                  ...item,
+                  jobRoleInput: e.target.value,
+                }))
+              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  setBasicInfo((item) => ({
+                    ...item,
+                    jobRoleInput: "",
+                    jobRole: [...item.jobRole, item.jobRoleInput],
+                  }));
+                }
+              }}
+              value={basicInfo.jobRoleInput}
+              type="text"
+              placeholder="Eg. Web Developer"
+            />
+            <i
+              class="fa-solid fa-angle-down city-selector"
+              onClick={() =>
+                setBasicInfo((item) => ({
+                  ...item,
+                  jobRoleStatus: !item.jobRoleStatus,
+                }))
+              }
+            ></i>
+            <div className="role-dropdown-box">
+              {basicInfo.jobRoleStatus === true
+                ? jobRolesArray.map((item) => (
+                    <div className="cities-checkbox-container">
+                      <input
+                        className="cities-checkbox"
+                        onClick={() =>
+                          setBasicInfo((previousItem) => ({
+                            ...previousItem,
+                            jobRole: previousItem.jobRole.includes(item)
+                              ? previousItem.jobRole.filter(
+                                  (removeItem) => removeItem !== item
+                                )
+                              : [...previousItem, item],
+                          }))
+                        }
+                        checked={basicInfo.jobRole.includes(item)}
+                        type="checkbox"
+                      />
+                      <div className="cities-dropdown-box-text">{item}</div>
+                    </div>
+                  ))
+                : null}
+            </div>
+          </div>
+          <div className="added-btn-container">
+            {basicInfo.jobRole.map((item) => {
+              return (
+                <div className="added-btn">
+                  <div>{item}</div>
+                  <i
+                    class="fa-solid fa-circle-xmark delete-btn"
+                    onClick={() =>
+                      setBasicInfo((previousItem) => ({
+                        ...previousItem,
+                        jobRole: previousItem.jobRole.filter(
+                          (removeItem) => removeItem !== item
+                        ),
+                      }))
+                    }
+                  ></i>
+                </div>
+              );
+            })}
+          </div>
           <div className="top-citys-text">Top cities you may prefer:</div>
           <div className="job-rols-container">
             <div
@@ -59,7 +130,9 @@ const StepThreePage = () => {
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,
-                  jobRole: "Frontend Developer",
+                  jobRole: item.jobRole.includes("Frontend Developer")
+                    ? [...item.jobRole]
+                    : [...item.jobRole, "Frontend Developer"],
                 }))
               }
             >
@@ -70,7 +143,9 @@ const StepThreePage = () => {
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,
-                  jobRole: "Backend Developer",
+                  jobRole: item.jobRole.includes("Backend Developer")
+                    ? [...item.jobRole]
+                    : [...item.jobRole, "Backend Developer"],
                 }))
               }
             >
@@ -79,7 +154,12 @@ const StepThreePage = () => {
             <div
               className="job-btns"
               onClick={() =>
-                setBasicInfo((item) => ({ ...item, jobRole: "Data Scientist" }))
+                setBasicInfo((item) => ({
+                  ...item,
+                  jobRole: item.jobRole.includes("Data Scientist")
+                    ? [...item.jobRole]
+                    : [...item.jobRole, "Data Scientist"],
+                }))
               }
             >
               Data Scientist
@@ -90,7 +170,9 @@ const StepThreePage = () => {
           </div>
           <div className="experience-container">
             <div
-              className="job-btns"
+              className={`job-btns ${
+                basicInfo.experience === "Fresher" ? "checked-experience" : null
+              }`}
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,
@@ -101,7 +183,11 @@ const StepThreePage = () => {
               Fresher
             </div>
             <div
-              className="job-btns"
+              className={`job-btns ${
+                basicInfo.experience === "1-3 years"
+                  ? "checked-experience"
+                  : null
+              }`}
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,
@@ -112,7 +198,11 @@ const StepThreePage = () => {
               1-3 years
             </div>
             <div
-              className="job-btns"
+              className={`job-btns ${
+                basicInfo.experience === "3-6 years"
+                  ? "checked-experience"
+                  : null
+              }`}
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,
@@ -123,7 +213,11 @@ const StepThreePage = () => {
               3-6 years
             </div>
             <div
-              className="job-btns"
+              className={`job-btns ${
+                basicInfo.experience === "6+ years"
+                  ? "checked-experience"
+                  : null
+              }`}
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,

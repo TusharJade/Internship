@@ -10,14 +10,13 @@ const StepOnePage = () => {
 
   const { storedDataState, storedDataDispatch } = useDataContext();
 
-  const [basicInfo, setBasicInfo] = useState({ name: "", gender: "" });
+  const [basicInfo, setBasicInfo] = useState("");
 
   const navigate = useNavigate();
 
   const stepOneSubmitter = (e) => {
     e.preventDefault();
-    storedDataDispatch({ type: "STEP_ONE_SUBMISSION", payload: basicInfo });
-    if (basicInfo.gender.length === 0 && storedDataState.gender.length === 0) {
+    if (storedDataState.gender.length === 0) {
       toast.warning("Please choose your gender", { autoClose: 2000 });
     } else {
       navigate("/step-Two");
@@ -65,13 +64,10 @@ const StepOnePage = () => {
           <input
             className="input-name"
             onChange={(e) =>
-              setBasicInfo((item) => ({
-                ...item,
-                name: e.target.value,
-              }))
+              storedDataDispatch({ type: "ADD_NAME", payload: e.target.value })
             }
             type="text"
-            value={storedDataState.name || basicInfo.name}
+            value={storedDataState.name}
             placeholder="Enter your name"
             required
           />
@@ -80,26 +76,22 @@ const StepOnePage = () => {
             <div
               className="gender-box"
               onClick={() =>
-                setBasicInfo((item) => ({ ...item, gender: "male" }))
+                storedDataDispatch({ type: "ADD_GENDER", payload: "male" })
               }
             >
               <img src="./assets/boy.svg" alt="error" />
-              {basicInfo.gender === "male" ||
-              storedDataState.gender === "male" ? (
+              {storedDataState.gender === "male" ? (
                 <i className="fa-solid fa-circle-check checked-gender"></i>
-              ) : (
-                ""
-              )}
+              ) : null}
             </div>
             <div
               className="gender-box"
               onClick={() =>
-                setBasicInfo((item) => ({ ...item, gender: "female" }))
+                storedDataDispatch({ type: "ADD_GENDER", payload: "female" })
               }
             >
               <img src="./assets/girl.svg" alt="error" />
-              {basicInfo.gender === "female" ||
-              storedDataState.gender === "female" ? (
+              {storedDataState.gender === "female" ? (
                 <i className="fa-solid fa-circle-check checked-gender"></i>
               ) : null}
             </div>

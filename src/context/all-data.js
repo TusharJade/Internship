@@ -11,12 +11,6 @@ const storedDataFunction = (storedDataState, action) => {
         ...storedDataState,
         mobileNumber: action.payload,
       };
-    case "STEP_ONE_SUBMISSION":
-      return {
-        ...storedDataState,
-        gender: action.payload.gender,
-        name: action.payload.name,
-      };
     case "STEP_TWO_SUBMISSION":
       return {
         ...storedDataState,
@@ -39,6 +33,16 @@ const storedDataFunction = (storedDataState, action) => {
       return {
         ...storedDataState,
         city: storedDataState.city.filter((item) => item !== action.payload),
+      };
+    case "ADD_GENDER":
+      return {
+        ...storedDataState,
+        gender: action.payload,
+      };
+    case "ADD_NAME":
+      return {
+        ...storedDataState,
+        name: action.payload,
       };
     default:
       return storedDataState;

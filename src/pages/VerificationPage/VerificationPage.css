@@ -2,7 +2,6 @@
     margin: 1rem 0 0 6rem;
 }
 
-
 .text-asking-otp{
     font-size: 1.2rem;
     font-weight: 500;
@@ -29,4 +28,10 @@
     margin:8px 0 0 1px;
     font-size: 13.7px;
     cursor: pointer;
+}
+
+@media (max-width: 464px) {
+    .otp-container{
+        margin: 3.5rem 0 0 4rem;
+    }
 }

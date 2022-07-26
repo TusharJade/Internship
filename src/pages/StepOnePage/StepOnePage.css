@@ -83,3 +83,10 @@
     top: -7px;
     right: -6px;
 }
+
+@media (max-width: 650px) {
+    .steps-container{
+        margin: 2.5rem auto 0 auto;
+        width: 80%;
+    }
+}

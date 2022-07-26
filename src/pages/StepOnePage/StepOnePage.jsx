@@ -1,5 +1,4 @@
 import "./StepOnePage.css";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/all-data";
@@ -9,8 +8,6 @@ const StepOnePage = () => {
   const { authState, setAuthState } = useAuthContext();
 
   const { storedDataState, storedDataDispatch } = useDataContext();
-
-  const [basicInfo, setBasicInfo] = useState("");
 
   const navigate = useNavigate();
 

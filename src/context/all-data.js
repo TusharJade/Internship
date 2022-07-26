@@ -20,7 +20,6 @@ const storedDataFunction = (storedDataState, action) => {
       return {
         ...storedDataState,
         jobRole: action.payload.jobRole,
-        experience: action.payload.experience,
       };
     case "ADD_CITY":
       return {
@@ -43,6 +42,26 @@ const storedDataFunction = (storedDataState, action) => {
       return {
         ...storedDataState,
         name: action.payload,
+      };
+
+    case "ADD_JOB_ROLE":
+      return {
+        ...storedDataState,
+        jobRole: storedDataState.jobRole.includes(action.payload)
+          ? [...storedDataState.jobRole]
+          : [...storedDataState.jobRole, action.payload],
+      };
+    case "REMOVE_JOB_ROLE":
+      return {
+        ...storedDataState,
+        jobRole: storedDataState.jobRole.filter(
+          (item) => item !== action.payload
+        ),
+      };
+    case "EXPERIENCE":
+      return {
+        ...storedDataState,
+        experience: action.payload,
       };
     default:
       return storedDataState;

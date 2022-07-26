@@ -21,7 +21,6 @@ const StepThreePage = () => {
 
   const [basicInfo, setBasicInfo] = useState({
     jobRole: [],
-    experience: "",
     jobRoleInput: "",
     jobRoleStatus: false,
   });
@@ -90,8 +89,11 @@ const StepThreePage = () => {
                   setBasicInfo((item) => ({
                     ...item,
                     jobRoleInput: "",
-                    jobRole: [...item.jobRole, item.jobRoleInput],
                   }));
+                  storedDataDispatch({
+                    type: "ADD_JOB_ROLE",
+                    payload: basicInfo.jobRoleInput,
+                  });
                 }
               }}
               value={basicInfo.jobRoleInput}
@@ -114,16 +116,17 @@ const StepThreePage = () => {
                       <input
                         className="cities-checkbox"
                         onClick={() =>
-                          setBasicInfo((previousItem) => ({
-                            ...previousItem,
-                            jobRole: previousItem.jobRole.includes(item)
-                              ? previousItem.jobRole.filter(
-                                  (removeItem) => removeItem !== item
-                                )
-                              : [...previousItem.jobRole, item],
-                          }))
+                          storedDataState.jobRole.includes(item)
+                            ? storedDataDispatch({
+                                type: "REMOVE_JOB_ROLE",
+                                payload: item,
+                              })
+                            : storedDataDispatch({
+                                type: "ADD_JOB_ROLE",
+                                payload: item,
+                              })
                         }
-                        checked={basicInfo.jobRole.includes(item)}
+                        checked={storedDataState.jobRole.includes(item)}
                         type="checkbox"
                       />
                       <div className="cities-dropdown-box-text">{item}</div>
@@ -133,19 +136,17 @@ const StepThreePage = () => {
             </div>
           </div>
           <div className="added-btn-container">
-            {basicInfo.jobRole.map((item, i) => {
+            {storedDataState.jobRole.map((item, i) => {
               return (
                 <div className="added-btn" key={i}>
                   <div>{item}</div>
                   <i
                     className="fa-solid fa-circle-xmark delete-btn"
                     onClick={() =>
-                      setBasicInfo((previousItem) => ({
-                        ...previousItem,
-                        jobRole: previousItem.jobRole.filter(
-                          (removeItem) => removeItem !== item
-                        ),
-                      }))
+                      storedDataDispatch({
+                        type: "REMOVE_JOB_ROLE",
+                        payload: item,
+                      })
                     }
                   ></i>
                 </div>
@@ -157,12 +158,10 @@ const StepThreePage = () => {
             <div
               className="job-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  jobRole: item.jobRole.includes("Frontend Developer")
-                    ? [...item.jobRole]
-                    : [...item.jobRole, "Frontend Developer"],
-                }))
+                storedDataDispatch({
+                  type: "ADD_JOB_ROLE",
+                  payload: "Frontend Developer",
+                })
               }
             >
               Frontend Developer
@@ -170,12 +169,10 @@ const StepThreePage = () => {
             <div
               className="job-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  jobRole: item.jobRole.includes("Backend Developer")
-                    ? [...item.jobRole]
-                    : [...item.jobRole, "Backend Developer"],
-                }))
+                storedDataDispatch({
+                  type: "ADD_JOB_ROLE",
+                  payload: "Backend Developer",
+                })
               }
             >
               Backend Developer
@@ -183,12 +180,10 @@ const StepThreePage = () => {
             <div
               className="job-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  jobRole: item.jobRole.includes("Data Scientist")
-                    ? [...item.jobRole]
-                    : [...item.jobRole, "Data Scientist"],
-                }))
+                storedDataDispatch({
+                  type: "ADD_JOB_ROLE",
+                  payload: "Data Scientist",
+                })
               }
             >
               Data Scientist
@@ -200,58 +195,48 @@ const StepThreePage = () => {
           <div className="experience-container">
             <div
               className={`job-btns ${
-                basicInfo.experience === "Fresher" ? "checked-experience" : null
+                storedDataState.experience === "Fresher"
+                  ? "checked-experience"
+                  : null
               }`}
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  experience: "Fresher",
-                }))
+                storedDataDispatch({ type: "EXPERIENCE", payload: "Fresher" })
               }
             >
               Fresher
             </div>
             <div
               className={`job-btns ${
-                basicInfo.experience === "1-3 years"
+                storedDataState.experience === "1-3 years"
                   ? "checked-experience"
                   : null
               }`}
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  experience: "1-3 years",
-                }))
+                storedDataDispatch({ type: "EXPERIENCE", payload: "1-3 years" })
               }
             >
               1-3 years
             </div>
             <div
               className={`job-btns ${
-                basicInfo.experience === "3-6 years"
+                storedDataState.experience === "3-6 years"
                   ? "checked-experience"
                   : null
               }`}
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  experience: "3-6 years",
-                }))
+                storedDataDispatch({ type: "EXPERIENCE", payload: "3-6 years" })
               }
             >
               3-6 years
             </div>
             <div
               className={`job-btns ${
-                basicInfo.experience === "6+ years"
+                storedDataState.experience === "6+ years"
                   ? "checked-experience"
                   : null
               }`}
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  experience: "6+ years",
-                }))
+                storedDataDispatch({ type: "EXPERIENCE", payload: "6+ years" })
               }
             >
               6+ years

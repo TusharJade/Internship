@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/auth";
 
 const VerificationPage = () => {
-  const { authState, setAuthState } = useAuthContext();
+  const { setAuthState } = useAuthContext();
   const navigate = useNavigate();
 
   const otpSubmitter = (e) => {

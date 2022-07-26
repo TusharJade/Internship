@@ -15,7 +15,7 @@ const jobRolesArray = [
 ];
 
 const StepThreePage = () => {
-  const { authState, setAuthState } = useAuthContext();
+  const { authState } = useAuthContext();
 
   const { storedDataState, storedDataDispatch, postRequest } = useDataContext();
 

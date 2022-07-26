@@ -21,7 +21,6 @@ const storedDataFunction = (storedDataState, action) => {
       return {
         ...storedDataState,
         email: action.payload.email,
-        city: action.payload.city,
       };
     case "STEP_THREE_SUBMISSION":
       return {
@@ -29,7 +28,18 @@ const storedDataFunction = (storedDataState, action) => {
         jobRole: action.payload.jobRole,
         experience: action.payload.experience,
       };
-
+    case "ADD_CITY":
+      return {
+        ...storedDataState,
+        city: storedDataState.city.includes(action.payload)
+          ? [...storedDataState.city]
+          : [...storedDataState.city, action.payload],
+      };
+    case "DELETE_CITY":
+      return {
+        ...storedDataState,
+        city: storedDataState.city.filter((item) => item !== action.payload),
+      };
     default:
       return storedDataState;
   }

@@ -14,7 +14,6 @@ const StepTwoPage = () => {
 
   const [basicInfo, setBasicInfo] = useState({
     email: "",
-    city: [],
     cityName: "",
     dropdown: false,
   });
@@ -23,7 +22,7 @@ const StepTwoPage = () => {
 
   const stepTwoSubmitter = (e) => {
     e.preventDefault();
-    if (basicInfo.city.length < 1) {
+    if (storedDataState.city.length < 1) {
       toast.warning("please fill prefered city", { autoClose: 2000 });
     } else {
       navigate("/step-three");
@@ -91,8 +90,11 @@ const StepTwoPage = () => {
                   setBasicInfo((item) => ({
                     ...item,
                     cityName: "",
-                    city: [...item.city, item.cityName],
                   }));
+                  storedDataDispatch({
+                    type: "ADD_CITY",
+                    payload: basicInfo.cityName,
+                  });
                   e.preventDefault();
                 }
               }}
@@ -117,16 +119,17 @@ const StepTwoPage = () => {
                         <input
                           className="cities-checkbox"
                           onClick={() =>
-                            setBasicInfo((checkboxItem) => ({
-                              ...checkboxItem,
-                              city: checkboxItem.city.includes(item)
-                                ? checkboxItem.city.filter(
-                                    (removeItem) => removeItem !== item
-                                  )
-                                : [...checkboxItem.city, item],
-                            }))
+                            storedDataState.city.includes(item)
+                              ? storedDataDispatch({
+                                  type: "DELETE_CITY",
+                                  payload: item,
+                                })
+                              : storedDataDispatch({
+                                  type: "ADD_CITY",
+                                  payload: item,
+                                })
                           }
-                          checked={basicInfo.city.includes(item)}
+                          checked={storedDataState.city.includes(item)}
                           type="checkbox"
                         />
                         <div className="cities-dropdown-box-text">{item}</div>
@@ -137,19 +140,14 @@ const StepTwoPage = () => {
             </div>
           </div>
           <div className="added-btn-container">
-            {basicInfo.city.map((item, i) => {
+            {storedDataState.city.map((item, i) => {
               return (
                 <div className="added-btn" key={i}>
                   <div>{item}</div>
                   <i
                     className="fa-solid fa-circle-xmark delete-btn"
                     onClick={() =>
-                      setBasicInfo((singleCity) => ({
-                        ...singleCity,
-                        city: singleCity.city.filter(
-                          (removeItem) => removeItem !== item
-                        ),
-                      }))
+                      storedDataDispatch({ type: "DELETE_CITY", payload: item })
                     }
                   ></i>
                 </div>
@@ -161,12 +159,7 @@ const StepTwoPage = () => {
             <div
               className="city-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  city: item.city.includes("Mumbai")
-                    ? [...item.city]
-                    : [...item.city, "Mumbai"],
-                }))
+                storedDataDispatch({ type: "ADD_CITY", payload: "Mumbai" })
               }
             >
               Mumbai
@@ -174,12 +167,7 @@ const StepTwoPage = () => {
             <div
               className="city-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  city: item.city.includes("Delhi")
-                    ? [...item.city]
-                    : [...item.city, "Delhi"],
-                }))
+                storedDataDispatch({ type: "ADD_CITY", payload: "Delhi" })
               }
             >
               Delhi
@@ -187,12 +175,7 @@ const StepTwoPage = () => {
             <div
               className="city-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  city: item.city.includes("Pune")
-                    ? [...item.city]
-                    : [...item.city, "Pune"],
-                }))
+                storedDataDispatch({ type: "ADD_CITY", payload: "Pune" })
               }
             >
               Pune
@@ -200,12 +183,7 @@ const StepTwoPage = () => {
             <div
               className="city-btns"
               onClick={() =>
-                setBasicInfo((item) => ({
-                  ...item,
-                  city: item.city.includes("Bengaluru")
-                    ? [...item.city]
-                    : [...item.city, "Bengaluru"],
-                }))
+                storedDataDispatch({ type: "ADD_CITY", payload: "Bengaluru" })
               }
             >
               Bengaluru

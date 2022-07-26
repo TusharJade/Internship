@@ -1,7 +1,9 @@
 import "./StepThreePage.css";
 import { useState } from "react";
-import { useDataContext } from "../../context/all-data";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import { useAuthContext } from "../../context/auth";
+import { useDataContext } from "../../context/all-data";
 
 const jobRolesArray = [
   "Frontend Developer",
@@ -13,6 +15,8 @@ const jobRolesArray = [
 ];
 
 const StepThreePage = () => {
+  const { authState, setAuthState } = useAuthContext();
+
   const { storedDataState, storedDataDispatch, postRequest } = useDataContext();
 
   const [basicInfo, setBasicInfo] = useState({
@@ -21,6 +25,8 @@ const StepThreePage = () => {
     jobRoleInput: "",
     jobRoleStatus: false,
   });
+
+  const navigate = useNavigate();
 
   const stepThreeSubmitter = (e) => {
     e.preventDefault();
@@ -41,11 +47,30 @@ const StepThreePage = () => {
         <div className="steps-container">
           <div className="help-use-text">Help us know you better!</div>
           <div className="all-btn-container">
-            <button className="step-btns active-btn">1</button>
+            <button
+              className={`step-btns ${authState.stepOne ? "active-btn" : null}`}
+              onClick={() => (authState.stepOne ? navigate("/step-one") : null)}
+            >
+              1
+            </button>
             <div className="line-break">-----</div>
-            <button className="step-btns active-btn">2</button>
+            <button
+              className={`step-btns ${authState.stepTwo ? "active-btn" : null}`}
+              onClick={() => (authState.stepTwo ? navigate("/step-two") : null)}
+            >
+              2
+            </button>
             <div className="line-break">-----</div>
-            <button className="step-btns active-btn">3</button>
+            <button
+              className={`step-btns ${
+                authState.stepThree ? "active-btn" : null
+              }`}
+              onClick={() =>
+                authState.stepThree ? navigate("/step-three") : null
+              }
+            >
+              3
+            </button>
           </div>
         </div>
         <div className="steps-container">

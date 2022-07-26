@@ -16,7 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/OTP-verification" element={<VerificationPage />} />
+
         <Route path="/step-one" element={<StepOnePage />} />
+
         <Route path="/step-two" element={<StepTwoPage />} />
         <Route path="/step-three" element={<StepThreePage />} />
       </Routes>

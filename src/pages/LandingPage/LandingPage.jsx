@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/all-data";
 
 const LandingPage = () => {
-  const { storedDataDispatch } = useDataContext();
+  const { storedDataDispatch, storedDataState } = useDataContext();
 
   const [number, setNumber] = useState({ phoneNumber: "", numberCode: "91" });
 
@@ -41,7 +41,7 @@ const LandingPage = () => {
             onChange={(e) =>
               setNumber((item) => ({ ...item, phoneNumber: e.target.value }))
             }
-            value={number.phoneNumber}
+            value={number.phoneNumber || storedDataState.mobileNumber}
             placeholder="9970703322"
             pattern="[0-9]{10}"
             type="text"

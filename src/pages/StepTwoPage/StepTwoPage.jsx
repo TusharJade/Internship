@@ -2,12 +2,15 @@ import "./StepTwoPage.css";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/auth";
 import { useDataContext } from "../../context/all-data";
 
 const cities = ["Mumbai", "Pune", "Bengaluru", "Delhi", "Hyderabad", "Chennai"];
 
 const StepTwoPage = () => {
-  const { storedDataDispatch } = useDataContext();
+  const { authState, setAuthState } = useAuthContext();
+
+  const { storedDataState, storedDataDispatch } = useDataContext();
 
   const [basicInfo, setBasicInfo] = useState({
     email: "",
@@ -25,6 +28,7 @@ const StepTwoPage = () => {
     } else {
       navigate("/step-three");
       toast.success("Step-two form filled", { autoClose: 2000 });
+      setAuthState((item) => ({ ...item, stepThree: true }));
     }
     storedDataDispatch({ type: "STEP_TWO_SUBMISSION", payload: basicInfo });
   };
@@ -37,17 +41,40 @@ const StepTwoPage = () => {
         <div className="steps-container">
           <div className="help-use-text">Help us know you better!</div>
           <div className="all-btn-container">
-            <button className="step-btns active-btn">1</button>
+            <button
+              className={`step-btns ${authState.stepOne ? "active-btn" : null}`}
+              onClick={() => (authState.stepOne ? navigate("/step-one") : null)}
+            >
+              1
+            </button>
             <div className="line-break">-----</div>
-            <button className="step-btns active-btn">2</button>
+            <button
+              className={`step-btns ${authState.stepTwo ? "active-btn" : null}`}
+              onClick={() => (authState.stepTwo ? navigate("/step-two") : null)}
+            >
+              2
+            </button>
             <div className="line-break">-----</div>
-            <button className="step-btns">3</button>
+            <button
+              className={`step-btns ${
+                authState.stepThree ? "active-btn" : null
+              }`}
+              onClick={() =>
+                authState.stepThree ? navigate("/step-three") : null
+              }
+            >
+              3
+            </button>
           </div>
         </div>
         <div className="steps-container">
           <div className="heading-text">Where can we reach you?</div>
           <input
             className="input-name"
+            onChange={(e) =>
+              setBasicInfo((item) => ({ ...item, email: e.target.value }))
+            }
+            value={storedDataState.email || basicInfo.email}
             type="email"
             placeholder="Enter your email address"
             required

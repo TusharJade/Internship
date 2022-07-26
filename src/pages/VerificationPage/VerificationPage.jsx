@@ -1,13 +1,16 @@
 import "./VerificationPage.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/auth";
 
 const VerificationPage = () => {
+  const { authState, setAuthState } = useAuthContext();
   const navigate = useNavigate();
 
   const otpSubmitter = (e) => {
     e.preventDefault();
     toast.success("OTP is verified", { autoClose: 2000 });
+    setAuthState((item) => ({ ...item, stepOne: true }));
     navigate("/step-one");
   };
   return (

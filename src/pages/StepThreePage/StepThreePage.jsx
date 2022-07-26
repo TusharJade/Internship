@@ -1,6 +1,7 @@
 import "./StepThreePage.css";
 import { useState } from "react";
 import { useDataContext } from "../../context/all-data";
+import { toast } from "react-toastify";
 
 const jobRolesArray = [
   "Frontend Developer",
@@ -12,7 +13,7 @@ const jobRolesArray = [
 ];
 
 const StepThreePage = () => {
-  const { storedDataDispatch } = useDataContext();
+  const { storedDataState, storedDataDispatch, postRequest } = useDataContext();
 
   const [basicInfo, setBasicInfo] = useState({
     jobRole: [],
@@ -25,8 +26,11 @@ const StepThreePage = () => {
     e.preventDefault();
     storedDataDispatch({ type: "STEP_THREE_SUBMISSION", payload: basicInfo });
     basicInfo.experience.length > 0 && basicInfo.jobRole.length > 0
-      ? alert("request send")
-      : alert("Please fill both job role and work experience to move on ");
+      ? postRequest(storedDataState)
+      : toast.error("Please select job role and experience", {
+          position: "top-right",
+          autoClose: 2000,
+        });
   };
   return (
     <>
@@ -91,7 +95,7 @@ const StepThreePage = () => {
                               ? previousItem.jobRole.filter(
                                   (removeItem) => removeItem !== item
                                 )
-                              : [...previousItem, item],
+                              : [...previousItem.jobRole, item],
                           }))
                         }
                         checked={basicInfo.jobRole.includes(item)}

@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useContext, useReducer, createContext } from "react";
+import { toast } from "react-toastify";
 
 const dataContext = createContext(null);
 
@@ -43,10 +45,30 @@ const DataContextProvider = ({ children }) => {
     jobRole: [],
     experience: "",
   });
+
+  const postRequest = async (data) => {
+    try {
+      const response = await axios.post(
+        "https://api.fastjobs.io/frontendtask",
+        {
+          data,
+        }
+      );
+      toast.success("API request send successfully", {
+        autoClose: 2000,
+      });
+    } catch (error) {
+      toast.error("API request failed", { autoClose: 2000 });
+    }
+  };
   return (
-    <dataContext.Provider value={{ storedDataState, storedDataDispatch }}>
-      {children}
-    </dataContext.Provider>
+    <>
+      <dataContext.Provider
+        value={{ storedDataState, storedDataDispatch, postRequest }}
+      >
+        {children}
+      </dataContext.Provider>
+    </>
   );
 };
 const useDataContext = () => useContext(dataContext);

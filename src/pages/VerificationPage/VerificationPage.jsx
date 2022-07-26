@@ -1,4 +1,5 @@
 import "./VerificationPage.css";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const VerificationPage = () => {
@@ -6,6 +7,7 @@ const VerificationPage = () => {
 
   const otpSubmitter = (e) => {
     e.preventDefault();
+    toast.success("OTP is verified", { autoClose: 2000 });
     navigate("/step-one");
   };
   return (

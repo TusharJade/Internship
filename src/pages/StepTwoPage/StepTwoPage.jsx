@@ -1,5 +1,6 @@
 import "./StepTwoPage.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/all-data";
 
@@ -19,9 +20,12 @@ const StepTwoPage = () => {
 
   const stepTwoSubmitter = (e) => {
     e.preventDefault();
-    basicInfo.city.length < 1
-      ? alert("please fill prefered city")
-      : navigate("/step-three");
+    if (basicInfo.city.length < 1) {
+      toast.warning("please fill prefered city", { autoClose: 2000 });
+    } else {
+      navigate("/step-three");
+      toast.success("Step-two form filled", { autoClose: 2000 });
+    }
     storedDataDispatch({ type: "STEP_TWO_SUBMISSION", payload: basicInfo });
   };
   return (

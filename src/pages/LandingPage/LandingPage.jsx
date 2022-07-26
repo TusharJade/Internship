@@ -1,5 +1,6 @@
 import "./LandingPage.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/all-data";
 
@@ -13,6 +14,7 @@ const LandingPage = () => {
   const numberSumitter = (e) => {
     e.preventDefault();
     storedDataDispatch({ type: "MOBILE_NUMBER", payload: number.phoneNumber });
+    toast.success("Fill any four digit in OTP", { autoClose: 2000 });
     navigate("/OTP-verification");
   };
   return (

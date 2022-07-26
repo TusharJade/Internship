@@ -1,4 +1,6 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import { Route, Routes } from "react-router-dom";
 import {
   LandingPage,
@@ -18,6 +20,7 @@ function App() {
         <Route path="/step-two" element={<StepTwoPage />} />
         <Route path="/step-three" element={<StepThreePage />} />
       </Routes>
+      <ToastContainer />
       <div className="wave">
         <img src="./assets/wave.svg" alt="error" />
       </div>

@@ -1,5 +1,6 @@
 import "./StepOnePage.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/all-data";
 
@@ -13,9 +14,12 @@ const StepOnePage = () => {
   const stepOneSubmitter = (e) => {
     e.preventDefault();
     storedDataDispatch({ type: "STEP_ONE_SUBMISSION", payload: basicInfo });
-    basicInfo.gender.length === 0
-      ? alert("Please choose your gender first")
-      : navigate("/step-two");
+    if (basicInfo.gender.length === 0) {
+      toast.warning("Please choose your gender", { autoClose: 2000 });
+    } else {
+      navigate("/step-two");
+      toast.success("Step-one form filled", { autoClose: 2000 });
+    }
   };
   return (
     <>

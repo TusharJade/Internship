@@ -21,7 +21,7 @@ const LandingPage = () => {
     <>
       <form onSubmit={numberSumitter}>
         <button type="submit" className="next-btn-login">
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
         <div className="login-container">
           <div className="text-asking-number">Your mobile number?</div>

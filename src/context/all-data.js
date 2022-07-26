@@ -54,6 +54,7 @@ const DataContextProvider = ({ children }) => {
           data,
         }
       );
+      console.log(response);
       toast.success("API request send successfully", {
         autoClose: 2000,
       });

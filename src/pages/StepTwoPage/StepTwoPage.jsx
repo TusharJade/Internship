@@ -32,7 +32,7 @@ const StepTwoPage = () => {
     <>
       <form onSubmit={stepTwoSubmitter}>
         <button type="submit" className="next-btn-login">
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
         <div className="steps-container">
           <div className="help-use-text">Help us know you better!</div>
@@ -75,7 +75,7 @@ const StepTwoPage = () => {
             />
             <div>
               <i
-                class="fa-solid fa-angle-down city-selector"
+                className="fa-solid fa-angle-down city-selector"
                 onClick={() =>
                   setBasicInfo((item) => ({
                     ...item,
@@ -85,8 +85,8 @@ const StepTwoPage = () => {
               ></i>
               <div className="cities-dropdown-box">
                 {basicInfo.dropdown === true
-                  ? cities.map((item) => (
-                      <div className="cities-checkbox-container">
+                  ? cities.map((item, i) => (
+                      <div className="cities-checkbox-container" key={i}>
                         <input
                           className="cities-checkbox"
                           onClick={() =>
@@ -110,12 +110,12 @@ const StepTwoPage = () => {
             </div>
           </div>
           <div className="added-btn-container">
-            {basicInfo.city.map((item) => {
+            {basicInfo.city.map((item, i) => {
               return (
-                <div className="added-btn">
+                <div className="added-btn" key={i}>
                   <div>{item}</div>
                   <i
-                    class="fa-solid fa-circle-xmark delete-btn"
+                    className="fa-solid fa-circle-xmark delete-btn"
                     onClick={() =>
                       setBasicInfo((singleCity) => ({
                         ...singleCity,

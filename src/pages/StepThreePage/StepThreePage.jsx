@@ -36,7 +36,7 @@ const StepThreePage = () => {
     <>
       <form onSubmit={stepThreeSubmitter}>
         <button type="submit" className="next-btn-login">
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
         <div className="steps-container">
           <div className="help-use-text">Help us know you better!</div>
@@ -74,7 +74,7 @@ const StepThreePage = () => {
               placeholder="Eg. Web Developer"
             />
             <i
-              class="fa-solid fa-angle-down city-selector"
+              className="fa-solid fa-angle-down city-selector"
               onClick={() =>
                 setBasicInfo((item) => ({
                   ...item,
@@ -84,8 +84,8 @@ const StepThreePage = () => {
             ></i>
             <div className="role-dropdown-box">
               {basicInfo.jobRoleStatus === true
-                ? jobRolesArray.map((item) => (
-                    <div className="cities-checkbox-container">
+                ? jobRolesArray.map((item, i) => (
+                    <div className="cities-checkbox-container" key={i}>
                       <input
                         className="cities-checkbox"
                         onClick={() =>
@@ -108,12 +108,12 @@ const StepThreePage = () => {
             </div>
           </div>
           <div className="added-btn-container">
-            {basicInfo.jobRole.map((item) => {
+            {basicInfo.jobRole.map((item, i) => {
               return (
-                <div className="added-btn">
+                <div className="added-btn" key={i}>
                   <div>{item}</div>
                   <i
-                    class="fa-solid fa-circle-xmark delete-btn"
+                    className="fa-solid fa-circle-xmark delete-btn"
                     onClick={() =>
                       setBasicInfo((previousItem) => ({
                         ...previousItem,

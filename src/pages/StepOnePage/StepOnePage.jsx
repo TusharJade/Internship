@@ -25,7 +25,7 @@ const StepOnePage = () => {
     <>
       <form onSubmit={stepOneSubmitter}>
         <button type="submit" className="next-btn-login">
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
         <div className="steps-container">
           <div className="help-use-text">Help us know you better!</div>
@@ -61,7 +61,7 @@ const StepOnePage = () => {
             >
               <img src="./assets/boy.svg" alt="error" />
               {basicInfo.gender === "male" ? (
-                <i class="fa-solid fa-circle-check checked-gender"></i>
+                <i className="fa-solid fa-circle-check checked-gender"></i>
               ) : (
                 ""
               )}
@@ -74,7 +74,7 @@ const StepOnePage = () => {
             >
               <img src="./assets/girl.svg" alt="error" />
               {basicInfo.gender === "female" ? (
-                <i class="fa-solid fa-circle-check checked-gender"></i>
+                <i className="fa-solid fa-circle-check checked-gender"></i>
               ) : null}
             </div>
           </div>

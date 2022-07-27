@@ -8,11 +8,15 @@
 }
 
 :root{
-
+   --landing-page-box-shadow:#dddddd;
+   --landing-page-border:#e4e2e2;
+   --landing-page-bg:#fbf9f9;
+   --step-one-main-color:#0d86d6;
 }
 
 .wave{
     position: fixed;
     width: 100%;
     bottom: -6px;
+    z-index: -1;
 }

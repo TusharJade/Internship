@@ -4,7 +4,7 @@
 
 .help-use-text{
     font-size: 14.7px;
-    color: #0d86d6;
+    color: var(--step-one-main-color);
 }
 
 .all-btn-container{
@@ -30,11 +30,11 @@
 }
 
 .active-btn{
-    background-color: #0d86d6;
+    background-color: var(--step-one-main-color);
 }
 
 .input-name{
-    background-color: #fbf9f9;
+    background-color: var(--landing-page-bg);
     margin: 9px 0 0 0;
     width: 17rem;
     padding: 3px 1rem;
@@ -66,13 +66,13 @@
     border-radius: 1rem;
     margin-top: 1rem;
     border: 1px solid #dedede;
-    box-shadow: 0px 0px 32px 0px rgb(227, 227, 227);
+    box-shadow: 0px 0px 32px 0px #e3e3e3;
     position: relative;
     cursor: pointer;
 }
 
 .gender-box:hover{
-    background-color: #0d86d6;
+    background-color: var(--step-one-main-color);
 }
 
 .checked-gender{

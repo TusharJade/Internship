@@ -14,11 +14,11 @@
 .city-btns{
     font-size: 14px;
     padding: 3px 8px;
-    background-color: #fbf9f9;
-    color:#0d86d6;
+    background-color: var(--landing-page-bg);
+    color:var(--step-one-main-color);
     border-radius: 8px;
     border: 2.5px solid #e4e2e2;
-    box-shadow: 0px 0px 10px 0px rgb(221, 221, 221);
+    box-shadow: 0px 0px 10px 0px #dddddd;
     cursor: pointer;
 }
 
@@ -34,7 +34,7 @@
     top: 16px;
     left: 15.5rem;
     color: #807d7d;
-    background-color: #fbf9f9;
+    background-color: var(--landing-page-bg);
     cursor: pointer;
 }
 
@@ -49,13 +49,13 @@
 }
 
 .added-btn{
-    background-color: #0d86d6;
+    background-color: var(--step-one-main-color);
     color: white;
     padding: 3px 8px;
     font-size: 14px;
     border-radius: 8px;
     border: 2.5px solid #e4e2e2;
-    box-shadow: 0px 0px 10px 0px rgb(221, 221, 221);
+    box-shadow: 0px 0px 10px 0px #dddddd;
     display: flex;
     align-items: center;
 }
@@ -73,8 +73,8 @@
     z-index: 1;
     border-radius: 10px;
     width: 7.5rem;
-    background-color:#fbf9f9;
-    box-shadow: 0px 0px 10px 0px rgb(209, 209, 209);
+    background-color:var(--landing-page-bg);
+    box-shadow: 0px 0px 10px 0px #d1d1d1;
 }
 
 .cities-checkbox-container{

@@ -16,11 +16,7 @@ const storedDataFunction = (storedDataState, action) => {
         ...storedDataState,
         email: action.payload.email,
       };
-    case "STEP_THREE_SUBMISSION":
-      return {
-        ...storedDataState,
-        jobRole: action.payload.jobRole,
-      };
+
     case "ADD_CITY":
       return {
         ...storedDataState,

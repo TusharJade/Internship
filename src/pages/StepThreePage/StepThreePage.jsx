@@ -29,8 +29,7 @@ const StepThreePage = () => {
 
   const stepThreeSubmitter = (e) => {
     e.preventDefault();
-    storedDataDispatch({ type: "STEP_THREE_SUBMISSION", payload: basicInfo });
-    basicInfo.experience.length > 0 && basicInfo.jobRole.length > 0
+    storedDataState.experience.length > 0 && storedDataState.jobRole.length > 0
       ? postRequest(storedDataState)
       : toast.error("Please select job role and experience", {
           position: "top-right",
@@ -197,7 +196,7 @@ const StepThreePage = () => {
               className={`job-btns ${
                 storedDataState.experience === "Fresher"
                   ? "checked-experience"
-                  : null
+                  : ""
               }`}
               onClick={() =>
                 storedDataDispatch({ type: "EXPERIENCE", payload: "Fresher" })
@@ -209,7 +208,7 @@ const StepThreePage = () => {
               className={`job-btns ${
                 storedDataState.experience === "1-3 years"
                   ? "checked-experience"
-                  : null
+                  : ""
               }`}
               onClick={() =>
                 storedDataDispatch({ type: "EXPERIENCE", payload: "1-3 years" })
@@ -221,7 +220,7 @@ const StepThreePage = () => {
               className={`job-btns ${
                 storedDataState.experience === "3-6 years"
                   ? "checked-experience"
-                  : null
+                  : ""
               }`}
               onClick={() =>
                 storedDataDispatch({ type: "EXPERIENCE", payload: "3-6 years" })
@@ -233,7 +232,7 @@ const StepThreePage = () => {
               className={`job-btns ${
                 storedDataState.experience === "6+ years"
                   ? "checked-experience"
-                  : null
+                  : ""
               }`}
               onClick={() =>
                 storedDataDispatch({ type: "EXPERIENCE", payload: "6+ years" })

@@ -4,7 +4,7 @@
     position: absolute;
     top: 2.66rem;
     left: 15.5rem;
-    background-color: #fbf9f9;
+    background-color:  var(--landing-page-bg);
 }
 
 .job-role-selector:focus{
@@ -19,11 +19,11 @@
 .job-btns{
     font-size: 14px;
     padding: 3px 8px;
-    background-color: #fbf9f9;
-    color:#0d86d6 ;
+    background-color: var(--landing-page-bg);
+    color: var(--step-one-main-color);
     border-radius: 8px;
-    border: 1.5px solid #e4e2e2;
-    box-shadow: 0px 0px 10px 0px rgb(221, 221, 221);
+    border: 1.5px solid var(--landing-page-border);
+    box-shadow: 0px 0px 10px 0px var(--landing-page-box-shadow);
     cursor: pointer;
     margin: 0 10px 9px 0;
 }
@@ -56,8 +56,8 @@
     z-index: 1;
     border-radius: 10px;
     width: 11rem;
-    background-color:#fbf9f9;
-    box-shadow: 0px 0px 10px 0px rgb(209, 209, 209);
+    background-color: var(--landing-page-bg);
+    box-shadow: 0px 0px 10px 0px #d1d1d1;
 }
 
 @media (max-width:500px) {

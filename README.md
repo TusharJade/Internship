@@ -1,8 +1,4 @@
-### Demo video
-
-
-
-### Tech Stack Used -
+### Tech Stack Used 
 
 - HTML
 - CSS

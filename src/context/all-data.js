@@ -6,11 +6,6 @@ const dataContext = createContext(null);
 
 const storedDataFunction = (storedDataState, action) => {
   switch (action.type) {
-    case "MOBILE_NUMBER":
-      return {
-        ...storedDataState,
-        mobileNumber: action.payload,
-      };
     case "STEP_TWO_SUBMISSION":
       return {
         ...storedDataState,
@@ -59,6 +54,9 @@ const storedDataFunction = (storedDataState, action) => {
         ...storedDataState,
         experience: action.payload,
       };
+
+    case "VERIFICATION_RESPONSE":
+      return { ...storedDataState, verificationResponse: action.payload };
     default:
       return storedDataState;
   }
@@ -66,13 +64,13 @@ const storedDataFunction = (storedDataState, action) => {
 
 const DataContextProvider = ({ children }) => {
   const [storedDataState, storedDataDispatch] = useReducer(storedDataFunction, {
-    mobileNumber: "",
     name: "",
     gender: "",
     email: "",
     city: [],
     jobRole: [],
     experience: "",
+    verificationResponse: "",
   });
 
   const postRequest = async (data) => {

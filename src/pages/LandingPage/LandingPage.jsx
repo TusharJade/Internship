@@ -3,20 +3,38 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../../context/all-data";
+import { useAuthContext } from "../../context/auth";
 
 const LandingPage = () => {
-  const { storedDataDispatch, storedDataState } = useDataContext();
+  const { setUpRecaptch } = useAuthContext();
 
-  const [number, setNumber] = useState({ phoneNumber: "", numberCode: "91" });
+  const { storedDataDispatch } = useDataContext();
+
+  const [number, setNumber] = useState({ phoneNumber: "", numberCode: "+91" });
 
   const navigate = useNavigate();
 
-  const numberSumitter = (e) => {
+  const numberSumitter = async (e) => {
     e.preventDefault();
-    storedDataDispatch({ type: "MOBILE_NUMBER", payload: number.phoneNumber });
-    toast.success("Fill any four digit in OTP", { autoClose: 2000 });
-    navigate("/OTP-verification");
+    const num = number.numberCode + number.phoneNumber;
+    if (number.phoneNumber !== "") {
+      try {
+        const response = await setUpRecaptch(num);
+        storedDataDispatch({
+          type: "VERIFICATION_RESPONSE",
+          payload: response,
+        });
+        toast.success("Fill OTP you get on entered number", {
+          autoClose: 2000,
+        });
+        navigate("/OTP-verification");
+      } catch (error) {
+        console.log(error);
+      }
+    } else
+      toast.error("Please enter 10 digit phone num", { autoClose: "2000" });
   };
+
   return (
     <>
       <form onSubmit={numberSumitter}>
@@ -31,23 +49,24 @@ const LandingPage = () => {
               setNumber((item) => ({ ...item, numberCode: e.target.value }))
             }
           >
-            <option value="91">IN</option>
-            <option value="1">USA</option>
-            <option value="44">UK</option>
+            <option value="+91">IN</option>
+            <option value="+1">USA</option>
+            <option value="+44">UK</option>
           </select>
-          <span className="num-code">(+{number.numberCode})</span>
+          <span className="num-code">({number.numberCode})</span>
           <input
             className="mobile-number-input"
             onChange={(e) =>
               setNumber((item) => ({ ...item, phoneNumber: e.target.value }))
             }
-            value={number.phoneNumber || storedDataState.mobileNumber}
+            value={number.phoneNumber}
             placeholder="9970703322"
             pattern="[0-9]{10}"
             type="text"
             maxLength="10"
             required
           />
+          <div id="recaptcha-container" />
           <label className="checkbox-label" htmlFor="checkbox-verification">
             <input
               id="checkbox-verification"

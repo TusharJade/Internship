@@ -24,6 +24,10 @@ const LandingPage = () => {
           type: "VERIFICATION_RESPONSE",
           payload: response,
         });
+        storedDataDispatch({
+          type: "STORE_NUM_FOR_RESEND",
+          payload: num,
+        });
         toast.success("Fill OTP you get on entered number", {
           autoClose: 2000,
         });

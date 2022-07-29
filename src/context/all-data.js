@@ -57,6 +57,9 @@ const storedDataFunction = (storedDataState, action) => {
 
     case "VERIFICATION_RESPONSE":
       return { ...storedDataState, verificationResponse: action.payload };
+
+    case "STORE_NUM_FOR_RESEND":
+      return { ...storedDataState, mobNumber: action.payload };
     default:
       return storedDataState;
   }
@@ -69,6 +72,7 @@ const DataContextProvider = ({ children }) => {
     email: "",
     city: [],
     jobRole: [],
+    mobNumber: "",
     experience: "",
     verificationResponse: "",
   });

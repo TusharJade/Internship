@@ -1,14 +1,14 @@
 import "./VerificationPage.css";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/auth";
-import { useState } from "react";
 import { useDataContext } from "../../context/all-data";
-import { async } from "@firebase/util";
 
 const VerificationPage = () => {
-  const { storedDataState } = useDataContext();
-  const { setAuthState } = useAuthContext();
+  const { setAuthState, setUpRecaptch } = useAuthContext();
+
+  const { storedDataState, storedDataDispatch } = useDataContext();
 
   const [otp, setOtp] = useState({
     boxOne: "",
@@ -19,32 +19,47 @@ const VerificationPage = () => {
     boxSix: "",
   });
 
+  const finalOtp =
+    otp.boxOne +
+    otp.boxTwo +
+    otp.boxThree +
+    otp.boxFour +
+    otp.boxFive +
+    otp.boxSix;
+
   const navigate = useNavigate();
 
   const otpSubmitter = async (e) => {
-    const finalOtp =
-      otp.boxOne +
-      otp.boxTwo +
-      otp.boxThree +
-      otp.boxFour +
-      otp.boxFive +
-      otp.boxSix;
     e.preventDefault();
     try {
-      const response = storedDataState.verificationResponse;
-      response.confirm(finalOtp);
+      await storedDataState.verificationResponse.confirm(finalOtp);
       toast.success("OTP is verified", { autoClose: 2000 });
       setAuthState((item) => ({ ...item, stepOne: true }));
       navigate("/step-one");
     } catch (error) {
-      console.log(error);
+      toast.warning("OTP is wrong please re-enter OTP", { autoClose: 2000 });
+    }
+  };
+
+  const resendOtp = async () => {
+    try {
+      const response = await setUpRecaptch(storedDataState.mobNumber);
+      storedDataDispatch({
+        type: "VERIFICATION_RESPONSE",
+        payload: response,
+      });
+      toast.success("OTP has sended again", {
+        autoClose: 2000,
+      });
+    } catch (error) {
+      toast.warning(error.message, { autoClose: 2000 });
     }
   };
   return (
     <>
       <form onSubmit={otpSubmitter}>
         <button type="submit" className="next-btn-login">
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
         <div className="otp-container">
           <div className="text-asking-otp">Enter the OTP</div>
@@ -54,7 +69,7 @@ const VerificationPage = () => {
             type="text"
             maxLength="1"
             onChange={(e) =>
-              setOtp((item) => ({ ...item, otpOne: e.target.value }))
+              setOtp((item) => ({ ...item, boxOne: e.target.value }))
             }
             required
           />
@@ -64,7 +79,7 @@ const VerificationPage = () => {
             type="text"
             maxLength="1"
             onChange={(e) =>
-              setOtp((item) => ({ ...item, otpTwo: e.target.value }))
+              setOtp((item) => ({ ...item, boxTwo: e.target.value }))
             }
             required
           />
@@ -74,7 +89,7 @@ const VerificationPage = () => {
             type="text"
             maxLength="1"
             onChange={(e) =>
-              setOtp((item) => ({ ...item, otpThree: e.target.value }))
+              setOtp((item) => ({ ...item, boxThree: e.target.value }))
             }
             required
           />
@@ -84,7 +99,7 @@ const VerificationPage = () => {
             type="text"
             maxLength="1"
             onChange={(e) =>
-              setOtp((item) => ({ ...item, otpFour: e.target.value }))
+              setOtp((item) => ({ ...item, boxFour: e.target.value }))
             }
             required
           />
@@ -94,7 +109,7 @@ const VerificationPage = () => {
             type="text"
             maxLength="1"
             onChange={(e) =>
-              setOtp((item) => ({ ...item, otpFive: e.target.value }))
+              setOtp((item) => ({ ...item, boxFive: e.target.value }))
             }
             required
           />
@@ -104,11 +119,14 @@ const VerificationPage = () => {
             type="text"
             maxLength="1"
             onChange={(e) =>
-              setOtp((item) => ({ ...item, otpSix: e.target.value }))
+              setOtp((item) => ({ ...item, boxSix: e.target.value }))
             }
             required
           />
-          <div className="resend-code">Resend code</div>
+          <div id="recaptcha-container" />
+          <div className="resend-code" onClick={() => resendOtp()}>
+            Resend code
+          </div>
         </div>
       </form>
     </>
